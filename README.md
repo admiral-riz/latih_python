@@ -1,4 +1,4 @@
-# LatihPy
+# LatihPython
 
 Repository ini berisi contoh program sederhana untuk pembelajaran dasar bahasa pemrograman Python, mengikuti roadmap dasar Python.
 
