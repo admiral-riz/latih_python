@@ -1,6 +1,6 @@
-# LatihPython
+# Latihan - Python
 
-Repository ini berisi kumpulan contoh program sederhana untuk pembelajaran dasar bahasa pemrograman Python. Materi dan contoh kode disusun mengikuti roadmap fundamental Python agar mudah dipahami oleh pemula.
+Repository ini berisi kumpulan contoh program sederhana untuk pembelajaran dasar bahasa pemrograman Python . Materi dan contoh kode disusun mengikuti roadmap fundamental Python agar mudah dipahami oleh pemula.
 
 ## Roadmap Materi
 
