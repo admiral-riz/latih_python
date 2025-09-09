@@ -1,8 +1,3 @@
-Sip 👍 saya bikin README **lebih lengkap lagi**, isinya detail + visualisasi + instruksi tambahan, biar seperti dokumentasi project open source profesional.
-
----
-
-````markdown
 # 📘 Latihan - Python
 
 Repository ini berisi kumpulan **contoh program Python** yang disusun sesuai roadmap fundamental Python.  
@@ -88,7 +83,6 @@ Materi disusun sesuai urutan yang biasa ditemui saat belajar Python:
 ├── requirements.txt  # Daftar dependensi (Flask, requests)
 └── README.md         # Dokumentasi project
 ```
-````
 
 ---
 
