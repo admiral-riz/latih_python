@@ -256,7 +256,3 @@ Langkah kontribusi:
 
 Proyek ini dirilis dengan lisensi **MIT License**.
 Silakan digunakan, dimodifikasi, dan dibagikan untuk tujuan belajar.
-
-```
-
-```
