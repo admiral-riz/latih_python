@@ -72,7 +72,7 @@ Materi disusun sesuai urutan yang biasa ditemui saat belajar Python:
 
 ## 📂 Struktur Folder & File
 
-```bash
+````bash
 .
 ├── app.py            # Entry point Flask (menghubungkan coba1 & coba2)
 ├── main.py           # Program roadmap Python di terminal
@@ -82,32 +82,73 @@ Materi disusun sesuai urutan yang biasa ditemui saat belajar Python:
 │   └── style.css     # CSS untuk mempercantik tampilan Flask
 ├── requirements.txt  # Daftar dependensi (Flask, requests)
 └── README.md         # Dokumentasi project
-```
 
 ---
 
 ## ⚙️ Instalasi
 
-1. **Clone repository**
+### 1. Clone repository
 
-   ```sh
-   git clone <url-repo>
-   cd <folder-repo>
-   ```
+```sh
+git clone <url-repo>
+cd <folder-repo>
+````
 
-2. **Buat virtual environment** (opsional tapi disarankan)
+### 2. Buat virtual environment (opsional tapi disarankan)
 
-   ```sh
-   python -m venv venv
-   source venv/bin/activate   # Linux / MacOS
-   venv\Scripts\activate      # Windows
-   ```
+```sh
+python -m venv venv
+```
 
-3. **Install dependencies**
+Aktifkan:
 
-   ```sh
-   pip install -r requirements.txt
-   ```
+```sh
+# Windows
+venv\Scripts\activate
+
+# Linux / MacOS
+source venv/bin/activate
+```
+
+### 3. Instal Flask
+
+Ada 2 cara:
+
+#### a) Instal langsung dengan pip
+
+```sh
+pip install flask requests
+```
+
+#### b) Instal melalui requirements.txt
+
+```sh
+pip install -r requirements.txt
+```
+
+> File `requirements.txt` berisi:
+>
+> ```
+> Flask
+> requests
+> ```
+
+### 4. Verifikasi instalasi Flask
+
+Jalankan Python interactive shell:
+
+```sh
+python
+```
+
+Lalu import Flask:
+
+```python
+>>> from flask import Flask
+>>> print("Flask berhasil diinstal!")
+```
+
+Jika tidak ada error, berarti Flask sudah siap digunakan 🚀
 
 ---
 
