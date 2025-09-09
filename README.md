@@ -1,75 +1,187 @@
 # Latihan - Python
 
-Repository ini berisi kumpulan contoh program sederhana untuk pembelajaran dasar bahasa pemrograman Python . Materi dan contoh kode disusun mengikuti roadmap fundamental Python agar mudah dipahami oleh pemula.
+Repository ini berisi kumpulan contoh program sederhana untuk pembelajaran dasar bahasa pemrograman **Python**.  
+Materi disusun mengikuti roadmap fundamental Python agar mudah dipahami oleh pemula, baik untuk latihan di terminal maupun eksplorasi melalui web interaktif dengan Flask.
 
-## Roadmap Materi
+---
 
-1. **Basic Syntax**  
-   Penjelasan tentang cara penulisan kode Python yang benar, seperti penggunaan indentasi dan penulisan perintah dasar.
+## 🎯 Roadmap Materi
 
-2. **Variables and Data Types**  
-   Cara membuat variabel dan mengenal tipe data utama di Python: string, integer, float, dan boolean.
+1. **Basic Syntax**
 
-3. **Type Casting**  
-   Mengubah tipe data, misal dari integer ke string atau float ke integer, agar sesuai kebutuhan program.
+   - Penulisan kode Python yang benar (indentasi, statement dasar).
+   - `print()` untuk menampilkan teks.
 
-4. **Conditionals**  
-   Percabangan menggunakan `if`, `else`, dan `elif` untuk pengambilan keputusan berdasarkan kondisi tertentu.
+2. **Variables and Data Types**
 
-5. **Loops**  
-   Perulangan menggunakan `for` dan `while` untuk menjalankan kode secara berulang.
+   - String (`"teks"`), Integer (`123`), Float (`3.14`), Boolean (`True/False`).
+   - Cara membuat dan menampilkan variabel.
 
-6. **Exceptions**  
-   Penanganan error dengan `try`, `except`, agar program tidak berhenti saat terjadi kesalahan.
+3. **Type Casting**
 
-7. **Functions & Builtin Functions**  
-   Membuat fungsi sendiri dengan `def` dan menggunakan fungsi bawaan Python seperti `len()`, `print()`, dll.
+   - Konversi antar tipe data, contoh: `int()`, `str()`, `float()`.
 
-8. **Lists, Tuples, Sets**  
-   Mengenal struktur data untuk menyimpan banyak nilai:
+4. **Conditionals**
 
-   - List: data yang bisa diubah
-   - Tuple: data tetap
-   - Set: data unik tanpa duplikat
+   - Percabangan logika dengan `if`, `elif`, `else`.
 
-9. **Dictionaries**  
-   Struktur data untuk pasangan kunci-nilai, cocok untuk data terstruktur seperti biodata.
+5. **Loops**
 
-## Struktur Folder & File
+   - Perulangan `for` dan `while`.
+   - Iterasi menggunakan `range()`.
 
-- **src/main.py**  
-  Berisi contoh kode untuk setiap materi roadmap di atas dalam bentuk aplikasi terminal.  
-  Cocok untuk latihan langsung di command line atau IDE.
+6. **Exceptions**
 
-- **src/coba1.py**  
-  Berisi contoh aplikasi web sederhana menggunakan Flask yang menampilkan semua materi roadmap Python secara interaktif di halaman web.  
-  CSS terpisah di `src/style.css` untuk tampilan yang lebih rapi.
+   - Penanganan error dengan `try` dan `except`.
+   - Contoh: pembagian dengan nol.
 
-- **src/style.css**  
-  File CSS untuk mempercantik tampilan web pada aplikasi Flask.
+7. **Functions & Builtin Functions**
 
-- **requirements.txt**  
-  Daftar dependensi yang diperlukan, seperti Flask.
+   - Membuat fungsi sendiri dengan `def`.
+   - Menggunakan fungsi bawaan seperti `len()`, `print()`.
 
-## Cara Instalasi dan Menjalankan coba1.py
+8. **Lists, Tuples, Sets**
 
-1. Install Flask terlebih dahulu:
+   - **List**: data dinamis, bisa ditambah/ubah.
+   - **Tuple**: data statis (immutable).
+   - **Set**: data unik, tanpa duplikat.
+
+9. **Dictionaries**
+
+   - Menyimpan data dalam bentuk pasangan `key:value`.
+
+10. **Object Oriented Programming (OOP)**
+
+    - Membuat class & objek.
+    - Method untuk tambah data dan hitung rata-rata.
+
+11. **File I/O**
+    - Membuat file teks baru dan menulis isi.
+    - Membaca isi file.
+
+---
+
+## 📂 Struktur Folder & File
+
+```bash
+.
+├── app.py            # Entry point Flask, menghubungkan coba1 & coba2
+├── main.py           # Program latihan roadmap Python di terminal
+├── coba1.py          # Blueprint Flask: materi dasar & kompleks Python (web)
+├── coba2.py          # Blueprint Flask: aplikasi web sederhana (CRUD user)
+├── src/
+│   └── style.css     # CSS untuk mempercantik tampilan aplikasi Flask
+├── requirements.txt  # Daftar dependensi (Flask, requests)
+└── README.md         # Dokumentasi proyek
+```
+
+````
+
+---
+
+## ⚙️ Instalasi
+
+1. Clone repository:
+
    ```sh
-   pip install flask
+   git clone <url-repo-kamu>
+   cd <folder-repo>
    ```
-2. Jalankan file aplikasi web:
+
+2. Buat virtual environment (opsional, tapi disarankan):
+
    ```sh
-   python src/coba1.py
+   python -m venv venv
+   source venv/bin/activate   # Linux / MacOS
+   venv\Scripts\activate      # Windows
    ```
-3. Buka browser dan akses [http://localhost:5000](http://localhost:5000)  
-   Tampilan web akan muncul dengan materi roadmap Python dan CSS.
 
-## Tujuan
+3. Install dependensi:
 
-Memberikan pemahaman awal tentang sintaks dan konsep dasar Python sesuai roadmap untuk pemula, baik melalui aplikasi terminal (`main.py`) maupun aplikasi web interaktif (`coba1.py`).
+   ```sh
+   pip install -r requirements.txt
+   ```
 
-## Catatan
+---
 
-- Fokus utama pembelajaran ada di `main.py` untuk latihan di terminal dan `coba1.py` untuk eksplorasi materi secara visual di web.
-- File CSS (`style.css`) berada di folder `src` dan dilayani langsung oleh Flask.
-- Semua contoh kode dapat dimodifikasi sesuai kebutuhan belajar.
+## 🚀 Menjalankan Program
+
+### Mode Terminal
+
+Jalankan `main.py` untuk latihan dasar di terminal:
+
+```sh
+python main.py
+```
+
+Program akan menampilkan semua contoh roadmap Python langsung di console.
+
+### Mode Web (Flask)
+
+1. Jalankan aplikasi Flask:
+
+   ```sh
+   python app.py
+   ```
+
+2. Akses di browser:
+
+   - [http://localhost:5000/coba1](http://localhost:5000/coba1) → Materi Dasar Python
+   - [http://localhost:5000/coba2](http://localhost:5000/coba2) → Aplikasi Web Dev (user list & tambah user)
+
+---
+
+## 🎨 Tampilan Web
+
+- **coba1.py** → menampilkan roadmap Python (Bagian Sederhana & Kompleks).
+- **coba2.py** → aplikasi web dev sederhana: menampilkan daftar user & menambah user.
+- **style.css** → mempercantik tampilan web agar lebih rapi dan interaktif.
+
+Navigasi antar halaman tersedia melalui tombol:
+
+- Dari **coba1** → pindah ke **coba2**.
+- Dari **coba2** → kembali ke **coba1**.
+
+---
+
+## 🧑‍💻 Tujuan Proyek
+
+- Memberikan pemahaman dasar sintaks dan konsep fundamental Python untuk pemula.
+- Menyediakan **dua cara belajar**:
+
+  1. **Terminal (main.py)** → fokus pada logika & sintaks dasar.
+  2. **Web (app.py, coba1.py, coba2.py)** → eksplorasi materi secara visual & interaktif.
+
+---
+
+## 📝 Catatan
+
+- `main.py` cocok untuk latihan langsung di command line / IDE.
+- `app.py` menjalankan server Flask yang menghubungkan blueprint `coba1` & `coba2`.
+- CSS (`style.css`) ada di folder `src` dan otomatis dilayani Flask.
+- Semua kode bisa dimodifikasi sesuai kebutuhan belajar.
+
+---
+
+## 📖 Referensi Belajar Tambahan
+
+- [Dokumentasi Resmi Python](https://docs.python.org/3/)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [Python Roadmap untuk Pemula](https://roadmap.sh/python)
+
+---
+
+## 🤝 Kontribusi
+
+Silakan fork repository ini, buat branch baru, lalu ajukan pull request jika ingin menambahkan fitur atau materi baru.
+Contoh kontribusi: menambah materi Python lanjutan, mempercantik UI web, atau menambahkan contoh soal latihan.
+
+---
+
+## 📜 Lisensi
+
+Proyek ini bebas digunakan untuk keperluan belajar.
+Lisensi: **MIT License**.
+
+
+````
