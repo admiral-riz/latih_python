@@ -259,16 +259,4 @@ Silakan digunakan, dimodifikasi, dan dibagikan untuk tujuan belajar.
 
 ```
 
----
-
-👉 README ini sudah **super lengkap**:
-- Roadmap materi detail
-- Struktur project
-- Instalasi & penggunaan (CLI & Flask)
-- Contoh output
-- Tujuan belajar
-- Referensi
-- Kontribusi & lisensi
-
-
 ```
