@@ -1,25 +1,9 @@
-# Contoh aplikasi web sederhana dengan Flask, menampilkan materi dasar Python beserta penjelasannya
-
-from flask import Flask, render_template_string, url_for, send_from_directory
-import os
+from flask import Blueprint, render_template_string, url_for
 import math
 
-app = Flask(__name__)
+coba1_bp = Blueprint("coba1", __name__)
 
-# Route untuk melayani file CSS dari folder src
-@app.route('/src/<path:filename>')
-def src(filename):
-    return send_from_directory(os.path.join(app.root_path, 'src'), filename)
-
-@app.route('/src/coba2')
-def goto_coba2():
-    return """
-    <script>
-        window.location.href = 'http://localhost:5000/';
-    </script>
-    """
-
-@app.route('/')
+@coba1_bp.route("/")
 def home():
     # =========================
     # Bagian Sederhana
@@ -67,7 +51,6 @@ def home():
         data_mahasiswa_html += f"NIM: {nim}, Nama: {info['nama']}, Rata-rata nilai: {rata2:.2f}<br>"
     angka_ganjil = list(filter(lambda x: x % 2 != 0, angka))
     hasil_map = list(map(lambda x: x * 10, angka))
-    # Error handling dengan multiple exception (simulasi input)
     try:
         nilai = int("80")  # Simulasi input
         nilai_msg = f"Nilai yang dimasukkan: {nilai}"
@@ -94,71 +77,46 @@ def home():
     pi_val = math.pi
     isi_file = "Ini contoh menulis file dengan Python.\n"
 
+    # =========================
+    # HTML Output
+    # =========================
     html = f"""
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Belajar Dasar Python (Web)</title>
-        <link rel="stylesheet" href="{url_for('src', filename='style.css')}">
+        <title>Coba1 - Materi Dasar Python</title>
+        <link rel="stylesheet" href="/src/style.css">
     </head>
     <body>
-    <div class="container">
-    <h2>Bagian Sederhana</h2>
-    <div class="section"><b>Basic Syntax:</b> Menampilkan teks ke layar</div>
-    <div class="section"><b>Variables and Data Types:</b><br>
-    Nama: {nama}<br>
-    Umur: {umur}<br>
-    Tinggi: {tinggi}<br>
-    Mahasiswa?: {is_student}</div>
-    <div class="section"><b>Type Casting:</b><br>
-    Umur (string): {umur_str}<br>
-    Tinggi (int): {tinggi_int}</div>
-    <div class="section"><b>Conditionals:</b><br>
-    Status: {status}</div>
-    <div class="section"><b>Loops:</b><br>
-    Cetak angka 1 sampai 5: {loop_result}</div>
-    <div class="section"><b>Exceptions:</b><br>
-    {exception_msg}</div>
-    <div class="section"><b>Functions & Builtin Functions:</b><br>
-    Fungsi sapa: {sapa_result}<br>
-    Panjang nama: {panjang_nama}</div>
-    <div class="section"><b>Lists:</b><br>
-    {buah}</div>
-    <div class="section"><b>Tuples:</b><br>
-    {warna}</div>
-    <div class="section"><b>Sets:</b><br>
-    {angka_unik}</div>
-    <div class="section"><b>Dictionaries:</b><br>
-    {mahasiswa}</div>
+        <div class="container">
+        <h2>Bagian Sederhana</h2>
+        <div class="section"><b>Variables:</b><br>
+        Nama: {nama}<br>Umur: {umur}<br>Tinggi: {tinggi}<br>Mahasiswa?: {is_student}</div>
+        <div class="section"><b>Type Casting:</b> Umur (str): {umur_str}, Tinggi (int): {tinggi_int}</div>
+        <div class="section"><b>Conditionals:</b> {status}</div>
+        <div class="section"><b>Loops:</b> {loop_result}</div>
+        <div class="section"><b>Exceptions:</b> {exception_msg}</div>
+        <div class="section"><b>Functions:</b> {sapa_result}, Panjang nama: {panjang_nama}</div>
+        <div class="section"><b>Lists:</b> {buah}</div>
+        <div class="section"><b>Tuples:</b> {warna}</div>
+        <div class="section"><b>Sets:</b> {angka_unik}</div>
+        <div class="section"><b>Dictionaries:</b> {mahasiswa}</div>
 
-    <h2>Bagian Kompleks</h2>
-    <div class="section"><b>Fungsi dengan parameter default dan return value:</b><br>
-    Gaji mingguan: {gaji}</div>
-    <div class="section"><b>List komprehensi dan manipulasi data:</b><br>
-    Angka: {angka}<br>
-    Kuadrat: {kuadrat}</div>
-    <div class="section"><b>Nested dictionary dan akses data:</b><br>
-    {data_mahasiswa_html}</div>
-    <div class="section"><b>Penggunaan lambda dan fungsi map/filter:</b><br>
-    Angka ganjil: {angka_ganjil}<br>
-    Angka dikali 10: {hasil_map}</div>
-    <div class="section"><b>Error handling dengan multiple exception:</b><br>
-    {nilai_msg}</div>
-    <div class="section"><b>Class dan OOP sederhana:</b><br>
-    {mhs1_msg}</div>
-    <div class="section"><b>Penggunaan modul eksternal (math):</b><br>
-    Akar dari 144: {akar_144}<br>
-    Pi: {pi_val}</div>
-    <div class="section"><b>Membaca dan menulis file:</b><br>
-    Isi file: {isi_file}</div>
-    <div style="margin-top:30px;">
-        <a href="/src/coba2"><button style="padding:10px 20px;">Ke Web Dev (coba2.py)</button></a>
-    </div>
-    </div>
+        <h2>Bagian Kompleks</h2>
+        <div class="section"><b>Fungsi default:</b> Gaji mingguan: {gaji}</div>
+        <div class="section"><b>List comprehension:</b> Angka: {angka}, Kuadrat: {kuadrat}</div>
+        <div class="section"><b>Nested dict:</b><br>{data_mahasiswa_html}</div>
+        <div class="section"><b>Lambda & map/filter:</b> Ganjil: {angka_ganjil}, x10: {hasil_map}</div>
+        <div class="section"><b>Error handling:</b> {nilai_msg}</div>
+        <div class="section"><b>Class & OOP:</b> {mhs1_msg}</div>
+        <div class="section"><b>Modul math:</b> √144 = {akar_144}, π = {pi_val}</div>
+        <div class="section"><b>File I/O:</b> {isi_file}</div>
+
+        <div style="margin-top:30px;">
+            <a href="{url_for('coba2.home')}"><button>Ke Web Dev (coba2.py)</button></a>
+        </div>
+        </div>
     </body>
     </html>
     """
     return render_template_string(html)
-
-if __name__ == '__main__':
-    app.run()

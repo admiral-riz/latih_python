@@ -1,89 +1,72 @@
-from flask import Flask, render_template_string, url_for, send_from_directory, request
-import os
+from flask import Blueprint, render_template_string, url_for, request
 
-app = Flask(__name__)
+coba2_bp = Blueprint("coba2", __name__)
 
-@app.route('/src/<path:filename>')
-def src(filename):
-    return send_from_directory(os.path.join(app.root_path, 'src'), filename)
-
-users = [
+# gunakan nama berbeda agar tidak bentrok dengan fungsi
+users_data = [
     {"id": 1, "nama": "Andi", "email": "andi@mail.com"},
     {"id": 2, "nama": "Siti", "email": "siti@mail.com"},
 ]
 
-@app.route('/')
+@coba2_bp.route("/")
 def home():
     html = f"""
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Contoh Web Dev Python</title>
-        <link rel="stylesheet" href="{url_for('src', filename='style.css')}">
+        <title>Coba2 - Web Dev</title>
+        <link rel="stylesheet" href="/src/style.css">
     </head>
     <body>
-    <div class="container">
+        <div class="container">
         <h2>Selamat Datang di Web Dev Python</h2>
-        <p>Ini adalah contoh aplikasi web sederhana menggunakan Flask.</p>
+        <p>Contoh aplikasi Flask sederhana.</p>
         <nav style="margin-bottom:20px;">
-            <a href="/">Home</a> | 
-            <a href="/users">Daftar User</a> | 
-            <a href="/tambah">Tambah User</a> | 
-            <a href="/src/coba1"><button style="padding:8px 20px;">Ke Materi Dasar (coba1.py)</button></a>
+            <a href="{url_for('coba1.home')}"><button>Ke Materi Dasar (coba1.py)</button></a>
+            <a href="{url_for('coba2.daftar_user')}"><button>Lihat User</button></a>
+            <a href="{url_for('coba2.tambah_user')}"><button>Tambah User</button></a>
         </nav>
-        <div class="section">
-            <b>Fitur:</b>
-            <ul>
-                <li>Menampilkan halaman utama</li>
-                <li>Menampilkan daftar user</li>
-                <li>Menambah user baru</li>
-            </ul>
         </div>
-    </div>
     </body>
     </html>
     """
     return render_template_string(html)
 
-@app.route('/users')
+@coba2_bp.route("/users")
 def daftar_user():
-    user_list = ""
-    for user in users:
-        user_list += f"<tr><td>{user['id']}</td><td>{user['nama']}</td><td>{user['email']}</td></tr>"
+    rows = "".join(
+        f"<tr><td>{u['id']}</td><td>{u['nama']}</td><td>{u['email']}</td></tr>"
+        for u in users_data
+    )
     html = f"""
     <!DOCTYPE html>
     <html>
     <head>
         <title>Daftar User</title>
-        <link rel="stylesheet" href="{url_for('src', filename='style.css')}">
+        <link rel="stylesheet" href="/src/style.css">
     </head>
     <body>
-    <div class="container">
+        <div class="container">
         <h2>Daftar User</h2>
-        <nav style="margin-bottom:20px;">
-            <a href="/">Home</a> | 
-            <a href="/users">Daftar User</a> | 
-            <a href="/tambah">Tambah User</a> | 
-            <a href="/src/coba1"><button style="padding:8px 20px;">Ke Materi Dasar (coba1.py)</button></a>
-        </nav>
-        <table border="1" cellpadding="8" style="width:100%;background:#fff;">
+        <table border="1" cellpadding="5" style="width:100%;background:#fff;">
             <tr style="background:#eee;"><th>ID</th><th>Nama</th><th>Email</th></tr>
-            {user_list}
+            {rows}
         </table>
-    </div>
+        <br><a href="{url_for('coba2.home')}">Kembali</a>
+        </div>
     </body>
     </html>
     """
     return render_template_string(html)
 
-@app.route('/tambah', methods=['GET', 'POST'])
+@coba2_bp.route("/tambah", methods=["GET", "POST"])
 def tambah_user():
     pesan = ""
-    if request.method == 'POST':
-        nama = request.form.get('nama')
-        email = request.form.get('email')
+    if request.method == "POST":
+        nama = request.form.get("nama")
+        email = request.form.get("email")
         if nama and email:
-            users.append({"id": len(users)+1, "nama": nama, "email": email})
+            users_data.append({"id": len(users_data)+1, "nama": nama, "email": email})
             pesan = "User berhasil ditambahkan!"
         else:
             pesan = "Nama dan email harus diisi!"
@@ -92,41 +75,22 @@ def tambah_user():
     <html>
     <head>
         <title>Tambah User</title>
-        <link rel="stylesheet" href="{url_for('src', filename='style.css')}">
+        <link rel="stylesheet" href="/src/style.css">
     </head>
     <body>
-    <div class="container">
-        <h2>Tambah User Baru</h2>
-        <nav style="margin-bottom:20px;">
-            <a href="/">Home</a> | 
-            <a href="/users">Daftar User</a> | 
-            <a href="/tambah">Tambah User</a> | 
-            <a href="/src/coba1"><button style="padding:8px 20px;">Ke Materi Dasar (coba1.py)</button></a>
-        </nav>
+        <div class="container">
+        <h2>Tambah User</h2>
         <form method="post">
-            <div class="section">
-                <label>Nama:</label><br>
-                <input type="text" name="nama" style="width:100%;padding:8px;"><br><br>
-                <label>Email:</label><br>
-                <input type="email" name="email" style="width:100%;padding:8px;"><br><br>
-                <button type="submit" style="padding:8px 16px;">Tambah</button>
-            </div>
+            <label>Nama:</label><br>
+            <input type="text" name="nama" style="width:100%;padding:8px;"><br><br>
+            <label>Email:</label><br>
+            <input type="email" name="email" style="width:100%;padding:8px;"><br><br>
+            <button type="submit" style="padding:8px 16px;">Tambah</button>
         </form>
-        <div class="section" style="color:green;">{pesan}</div>
-    </div>
+        <p style="color:green;">{pesan}</p>
+        <a href="{url_for('coba2.home')}">Kembali</a>
+        </div>
     </body>
     </html>
     """
     return render_template_string(html)
-
-# Route untuk pindah ke coba1.py
-@app.route('/src/coba1')
-def goto_coba1():
-    return """
-    <script>
-        window.location.href = 'http://localhost:5000/';
-    </script>
-    """
-
-if __name__ == '__main__':
-    app.run()
